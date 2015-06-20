@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
   objects.push(req.body);
   var fs=require('fs');
   var id=objects.length-1;
-  fs.writeFile('../../data/'+id+'-contacts.json',JSON.stringify(req.body),function(err){
+  fs.writeFile('G:/project/data/'+id+'-contacts.json',JSON.stringify(req.body),function(err){
     if(err){
       console.log("error in file");
     }
@@ -40,7 +40,7 @@ router.put('/:id', function(req, res, next) {
     for(var i in obj2){
       obj3[i]=obj2[i];
     }
-  	 fs.writeFile('../../data/'+id+'-contacts.json',JSON.stringify(obj3),function(err){
+  	 fs.writeFile('G:/project/data/'+id+'-contacts.json',JSON.stringify(obj3),function(err){
       if(err){
         console.log("error in file");
       }
@@ -64,7 +64,7 @@ router.put('/msg/:id', function(req, res, next) {
    var fs=require('fs');
    var obj3=JSON.parse(fs.readFileSync("../../data/"+id+"-contacts.json"));
    obj3.message.push(req.body.message);
-   fs.writeFile('../../data/'+id+'-contacts.json',JSON.stringify(obj3),function(err){
+   fs.writeFile('G:/project/data/'+id+'-contacts.json',JSON.stringify(obj3),function(err){
       if(err){
         console.log("error in file");
       }
