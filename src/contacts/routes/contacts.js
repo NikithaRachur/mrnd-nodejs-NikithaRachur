@@ -14,7 +14,6 @@ router.post('/', function(req, res, next) {
 
 
 router.put('/:id', function(req, res, next) {
-   console.log(req.body);
    var obj1=objects[+(req.params.id)];
    var obj2=req.body;
    for(var i in obj2)
