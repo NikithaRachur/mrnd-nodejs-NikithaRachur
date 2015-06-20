@@ -2,8 +2,8 @@
 describe("Contacts Test Suite", function(){
 
 	//var request = require('request');
-	var request = require('C:/Program Files/nodejs/node_modules/npm/node_modules/request')
-	var base_url = "http://mycontactsvc.com:3000";
+	var request = require('G:/nodejs/node_modules/npm/node_modules/request')
+	var base_url = "http://localhost:3000";
 	var contacts_url = base_url + "/contacts";
 
 	describe("hello world", function(){
@@ -22,16 +22,16 @@ describe("Contacts Test Suite", function(){
 	});
 
 	describe("create update contact", function(){
-		var idCreated;
-
+        var idCreated;
 		it("should create contact",function(done){
-
+            
 			var contact = new Object();
 			contact.firstName = "jagan";
 			contact.lastName = "peri";
 			contact.phone = "23002300";
-
-			console.log(JSON.stringify(contact));
+            contact.message=[];
+            //contact.no_msgs=-1;
+			//console.log(JSON.stringify(contact));
 		    
 		    request.post({url: contacts_url,
 		    			  body: contact,
@@ -78,21 +78,44 @@ describe("Contacts Test Suite", function(){
 							done();
 					    });
 		});
-	});
+	//});
 
 	//TODO: Fill out the test case below that posts a message to a contact
 	// and retrieves it back.
-	describe("post and get message to contact", function(){
+	//describe("post and get message to contact", function(){
 
 		it("should post message to contact", function(done){
 			//TODO: Write your test case here.
-			done();
+			var updateContact=new Object();
+			updateContact.message="hi";
+			request.put({
+				           url: contacts_url + "/"+"msg"+"/" + idCreated,
+							body: updateContact,
+							json: true
+			            },
+			            function(error,response,body){
+			                expect(response.statusCode).toBe(200);
+							console.log(body);
+							//expect(body.message).toBe("hi");
+							done();
+			            });
 
 		});
 
 		it("should get message for contact", function(done){
 			//TODO: Write your test case here.
-			done();
+			request.get({
+				         url: contacts_url + "/"+"msg"+"/" + idCreated,
+							json: true
+
+			},
+			function(error,response,body){
+                  expect(response.statusCode).toBe(200);
+                  console.log(body);
+                  expect(body.message[0]).toBe("hi");
+                  //expect(body.message[msgno]).toBe("hi");
+                  done();
+			});
 
 		});
 
