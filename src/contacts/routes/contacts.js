@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
   var id=objects.length-1;
   fs.writeFile('../../data/'+id+'-contacts.json',JSON.stringify(req.body),function(err){
     if(err){
-      console.log("error in file");
+      console.log(err);
     }
     else
     {
@@ -42,7 +42,7 @@ router.put('/:id', function(req, res, next) {
     }
   	 fs.writeFile('../../data/'+id+'-contacts.json',JSON.stringify(obj3),function(err){
       if(err){
-        console.log("error in file");
+        console.log(err);
       }
       else
       {
@@ -53,20 +53,23 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.put('/msg/:id', function(req, res, next) {
-   console.log(req.body);
    var id = req.params.id;
+   var fs=require('fs');
    //var obj1=objects[+(req.params.id)];
    //var obj2=req.body;
    //for(var i in obj2)
   	 //obj1[i].push(obj2[i]);
    //objects[+(req.params.id)]=obj1;
    objects[(parseInt(req.params.id))].message.push(req.body.message);
-   var fs=require('fs');
-   var obj3=JSON.parse(fs.readFileSync("../../data/"+id+"-contacts.json"));
+    console.log("Nikki");
+    var obj3=JSON.parse(fs.readFileSync("../../data/"+id+"-contacts.json"));
+   
+  
+  
    obj3.message.push(req.body.message);
    fs.writeFile('../../data/'+id+'-contacts.json',JSON.stringify(obj3),function(err){
       if(err){
-        console.log("error in file");
+        console.log(err);
       }
       else
       {
@@ -80,7 +83,7 @@ router.put('/msg/:id', function(req, res, next) {
 });
 
 router.get('/msg/:id', function(req, res, next) {
-	res.send(objects[(parseInt(req.params.id))]);
+	res.send(objects[(parseInt(req.params.id))].message);
 });
 
 module.exports = router;

@@ -112,7 +112,7 @@ describe("Contacts Test Suite", function(){
 			function(error,response,body){
                   expect(response.statusCode).toBe(200);
                   console.log(body);
-                  expect(body.message[0]).toBe("hi");
+                  expect(body[0]).toBe("hi");
                   //expect(body.message[msgno]).toBe("hi");
                   done();
 			});

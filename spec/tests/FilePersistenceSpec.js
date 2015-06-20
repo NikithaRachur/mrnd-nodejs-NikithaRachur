@@ -15,7 +15,6 @@ var idCreated;
 
 	describe("create persist contact", function(){
 		
-
 		it("should create contact",function(done){
 
 			var contact = new Object();
@@ -81,7 +80,7 @@ var idCreated;
             var updateContact=new Object();
 			updateContact.message="hi";
 			request.put({
-				           url: contacts_url + "/"+"msg"+"/" + idCreated,
+				           url: contacts_url + "/msg/" + idCreated,
 							body: updateContact,
 							json: true
 			            },
