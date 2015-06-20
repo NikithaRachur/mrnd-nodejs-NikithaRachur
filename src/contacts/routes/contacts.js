@@ -32,7 +32,7 @@ router.put('/msg/:id', function(req, res, next) {
    objects[(parseInt(req.params.id))].message.push(req.body.message);
    //objects[(parseInt(req.params.id))].no_msgs+=1;
    //res.send(objects[(parseInt(req.params.id))].no_msgs+"");
-   res.sendStatus(200);
+   res.send(objects[(parseInt(req.params.id))]);
 });
 
 router.get('/msg/:id', function(req, res, next) {
